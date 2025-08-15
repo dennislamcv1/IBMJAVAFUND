@@ -1,0 +1,51 @@
+private void scheduleAppointment() {
+        if (pets.isEmpty()) {
+            System.out.println("No pets registered. Please register a pet first.");
+            return;
+        }
+
+        displayPets();
+        System.out.print("Enter Pet ID to schedule an appointment: ");
+        String petId = scanner.nextLine();
+
+        Pet pet = findPetById(petId);
+        if (pet == null) {
+            System.out.println("Pet not found!");
+            return;
+        }
+
+        String type;
+        while (true) {
+            System.out.print("Enter appointment type (Vet Visit, Vaccination, Grooming): ");
+            type = scanner.nextLine();
+            if (type.equalsIgnoreCase("Vet Visit") ||
+                type.equalsIgnoreCase("Vaccination") ||
+                type.equalsIgnoreCase("Grooming")) {
+                break;
+            } else {
+                System.out.println("Invalid appointment type. Try again.");
+            }
+        }
+
+        LocalDateTime dateTime = null;
+        while (dateTime == null) {
+            try {
+                System.out.print("Enter appointment date and time (yyyy-MM-dd HH:mm): ");
+                String dateTimeStr = scanner.nextLine();
+                dateTime = LocalDateTime.parse(dateTimeStr, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                if (dateTime.isBefore(LocalDateTime.now())) {
+                    System.out.println("Appointment must be in the future.");
+                    dateTime = null;
+                }
+            } catch (DateTimeParseException e) {
+                System.out.println("Invalid date/time format. Please try again.");
+            }
+        }
+
+        System.out.print("Enter notes (optional, press Enter to skip): ");
+        String notes = scanner.nextLine();
+
+        Appointment appointment = new Appointment(type, dateTime, notes);
+        pet.addAppointment(appointment);
+        System.out.println("Appointment scheduled successfully!");
+    }

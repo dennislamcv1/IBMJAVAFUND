@@ -1,0 +1,53 @@
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+public class Appointment implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    private String type;            // e.g., Vet visit, Vaccination, Grooming
+    private LocalDateTime dateTime; // Date and time of the appointment
+    private String notes;           // Optional notes
+
+    // Constructor
+    public Appointment(String type, LocalDateTime dateTime, String notes) {
+        this.type = type;
+        this.dateTime = dateTime;
+        this.notes = notes;
+    }
+
+    // Getters
+    public String getType() {
+        return type;
+    }
+
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    // Setters
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    // Readable string representation for display
+    @Override
+    public String toString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy, HH:mm");
+        String dateFormatted = dateTime.format(formatter);
+        return String.format("Appointment: %s | Date: %s | Notes: %s",
+                type, dateFormatted, (notes == null || notes.isEmpty()) ? "None" : notes);
+    }
+}

@@ -1,0 +1,12 @@
+private List<Pet> loadData() {
+        File file = new File(DATA_FILE);
+        if (!file.exists()) {
+            return new ArrayList<>();
+        }
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+            return (List<Pet>) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Error loading data: " + e.getMessage());
+            return new ArrayList<>();
+        }
+    }

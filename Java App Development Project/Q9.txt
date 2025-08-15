@@ -1,0 +1,68 @@
+// 1. Display all registered pets
+private void displayPets() {
+    if (pets.isEmpty()) {
+        System.out.println("No pets registered.");
+        return;
+    }
+    for (Pet pet : pets) {
+        System.out.println("\n" + pet);
+    }
+}
+
+// 2. Display all appointments for a specific pet
+private void displayAppointmentsForPet() {
+    if (pets.isEmpty()) {
+        System.out.println("No pets registered.");
+        return;
+    }
+    System.out.print("Enter Pet ID: ");
+    String petId = scanner.nextLine();
+
+    Pet pet = findPetById(petId);
+    if (pet == null) {
+        System.out.println("Pet not found!");
+        return;
+    }
+    if (pet.getAppointments().isEmpty()) {
+        System.out.println("No appointments for " + pet.getName());
+    } else {
+        System.out.println("\nAppointments for " + pet.getName() + ":");
+        for (Appointment app : pet.getAppointments()) {
+            System.out.println(app);
+        }
+    }
+}
+
+// 3. Display upcoming appointments for all pets
+private void displayUpcomingAppointments() {
+    LocalDateTime now = LocalDateTime.now();
+    boolean found = false;
+    for (Pet pet : pets) {
+        for (Appointment app : pet.getAppointments()) {
+            if (app.getDateTime().isAfter(now)) {
+                System.out.println(pet.getName() + " -> " + app);
+                found = true;
+            }
+        }
+    }
+    if (!found) {
+        System.out.println("No upcoming appointments found.");
+    }
+}
+
+// 4. Display past appointment history for each pet
+private void displayPastAppointments() {
+    LocalDateTime now = LocalDateTime.now();
+    boolean found = false;
+    for (Pet pet : pets) {
+        for (Appointment app : pet.getAppointments()) {
+            if (app.getDateTime().isBefore(now)) {
+                System.out.println(pet.getName() + " -> " + app);
+                found = true;
+            }
+        }
+    }
+    if (!found) {
+        System.out.println("No past appointments found.");
+    }
+}

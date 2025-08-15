@@ -1,0 +1,16 @@
+=== Paws & Whiskers Pet Care Scheduler ===
+1. Register a pet
+2. Schedule an appointment
+3. Display all pets
+4. Display appointments for a specific pet
+5. Display upcoming appointments for all pets
+6. Display past appointment history for each pet
+7. Generate reports
+8. Exit
+Choose an option: 1
+Enter pet name: Dennis
+Enter species/breed: Jeju
+Enter age (in years): 10
+Enter owner name: Lam
+Enter contact info: 0000000
+Pet registered successfully! Pet ID: 560cc113-708e-4aa7-9133-3ee72f0c865a

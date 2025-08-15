@@ -1,0 +1,39 @@
+private void registerPet() {
+    System.out.print("Enter pet name: ");
+    String name = scanner.nextLine();
+
+    System.out.print("Enter species/breed: ");
+    String species = scanner.nextLine();
+
+    int age = -1;
+    while (age < 0) {
+        try {
+            System.out.print("Enter age (in years): ");
+            age = Integer.parseInt(scanner.nextLine());
+            if (age < 0) {
+                System.out.println("Age cannot be negative.");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid age. Please enter a valid number.");
+        }
+    }
+
+    System.out.print("Enter owner name: ");
+    String ownerName = scanner.nextLine();
+
+    System.out.print("Enter contact info: ");
+    String contactInfo = scanner.nextLine();
+
+    Pet pet = new Pet(name, species, age, ownerName, contactInfo);
+
+    // Ensure unique ID (UUID already ensures uniqueness, but check anyway)
+    for (Pet existingPet : pets) {
+        if (existingPet.getPetId().equals(pet.getPetId())) {
+            System.out.println("Duplicate Pet ID detected. Registration failed.");
+            return;
+        }
+    }
+
+    pets.add(pet);
+    System.out.println("Pet registered successfully! Pet ID: " + pet.getPetId());
+}

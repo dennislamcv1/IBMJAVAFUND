@@ -1,0 +1,7 @@
+private void saveData() {
+    try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(DATA_FILE))) {
+        oos.writeObject(pets); // Saves the entire pets list, including appointments
+    } catch (IOException e) {
+        System.out.println("Error saving data: " + e.getMessage());
+    }
+}

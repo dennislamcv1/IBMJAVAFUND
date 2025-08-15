@@ -1,0 +1,47 @@
+private void run() {
+        boolean running = true;
+        while (running) {
+            System.out.println("\n=== Paws & Whiskers Pet Care Scheduler ===");
+            System.out.println("1. Register a pet");
+            System.out.println("2. Schedule an appointment");
+            System.out.println("3. Display all pets");
+            System.out.println("4. Display appointments for a specific pet");
+            System.out.println("5. Display upcoming appointments for all pets");
+            System.out.println("6. Display past appointment history for each pet");
+            System.out.println("7. Generate reports");
+            System.out.println("8. Exit");
+            System.out.print("Choose an option: ");
+
+            String choice = scanner.nextLine();
+            switch (choice) {
+                case "1":
+                    registerPet();
+                    break;
+                case "2":
+                    scheduleAppointment();
+                    break;
+                case "3":
+                    displayPets();
+                    break;
+                case "4":
+                    displayAppointmentsForPet();
+                    break;
+                case "5":
+                    displayUpcomingAppointments();
+                    break;
+                case "6":
+                    displayPastAppointments();
+                    break;
+                case "7":
+                    generateReports();
+                    break;
+                case "8":
+                    saveData();
+                    System.out.println("Data saved. Goodbye!");
+                    running = false;
+                    break;
+                default:
+                    System.out.println("Invalid option. Try again.");
+            }
+        }
+    }

@@ -1,0 +1,29 @@
+private void generateReports() {
+        LocalDateTime now = LocalDateTime.now();
+
+        System.out.println("\n=== Pets with Upcoming Appointments in Next Week ===");
+        for (Pet pet : pets) {
+            for (Appointment app : pet.getAppointments()) {
+                if (app.getDateTime().isAfter(now) &&
+                    app.getDateTime().isBefore(now.plusDays(7))) {
+                    System.out.println(pet.getName() + " -> " + app);
+                }
+            }
+        }
+
+        System.out.println("\n=== Pets Overdue for a Vet Visit (6+ Months) ===");
+        LocalDateTime sixMonthsAgo = now.minusMonths(6);
+        for (Pet pet : pets) {
+            boolean hadRecentVetVisit = false;
+            for (Appointment app : pet.getAppointments()) {
+                if (app.getType().equalsIgnoreCase("Vet Visit") &&
+                    app.getDateTime().isAfter(sixMonthsAgo)) {
+                    hadRecentVetVisit = true;
+                    break;
+                }
+            }
+            if (!hadRecentVetVisit) {
+                System.out.println(pet.getName() + " (" + pet.getPetId() + ")");
+            }
+        }
+    }
